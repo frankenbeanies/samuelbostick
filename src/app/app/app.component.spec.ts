@@ -1,4 +1,6 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
@@ -12,6 +14,9 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent
+            ],
+            schemas: [
+                NO_ERRORS_SCHEMA
             ]
         }).compileComponents();
     }));
@@ -19,5 +24,19 @@ describe('AppComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(AppComponent);
         sut = fixture.componentInstance;
+    });
+
+    describe('sanity check', () => {
+        it('should create the component', () => {
+            expect(sut).toBeTruthy();
+        });
+    });
+
+    describe('ui tests', () => {
+        it('should contain a navbar', () => {
+            let count: number = fixture.debugElement.queryAll(By.css('navbar')).length;
+            
+            expect(count).toBe(1);
+        });
     });
 });
